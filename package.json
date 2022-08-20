@@ -1,0 +1,25 @@
+{
+  "name": "file-reader",
+  "version": "0.0.1",
+  "description": "reads files from computer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pavel-chemist/file-reader.git"
+  },
+  "keywords": [
+    "files"
+  ],
+  "author": "Pavel-chemist",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pavel-chemist/file-reader/issues"
+  },
+  "homepage": "https://github.com/Pavel-chemist/file-reader#readme",
+  "devDependencies": {
+    "electron": "^20.0.3"
+  }
+}
