@@ -9,13 +9,23 @@ const btn = document.getElementById('btn');
 const filePathElement = document.getElementById('filePath');
 const fileContentElement = document.getElementById('fileContent');
 
-btn.addEventListener('click', async () => {
+let fileBuffer: Buffer;
+
+btn!.addEventListener('click', async () => {
+  console.log('button is clicked');
+
   const filePathAndData = await window.electronAPI.openFile();
   
-  console.log('filepath to use for file opening: ', filePathAndData[0]);
-  console.log('file contents: ', filePathAndData[1]);
-  
-  filePathElement.innerText = filePathAndData[0];
-  fileContentElement.innerText = filePathAndData[1];
-  
+  filePathElement!.innerText = filePathAndData[0];
+
+  fileBuffer = filePathAndData[1];
+  convertFileBufferToString();
 });
+
+function convertFileBufferToString() {
+  console.log('trying to convert buffer to hex string');
+  
+  const textRepresentation: string = fileBuffer.toString('hex');
+
+  fileContentElement!.innerText = textRepresentation
+}

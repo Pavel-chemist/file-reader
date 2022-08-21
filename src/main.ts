@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 
 async function handleFileOpen() {
-  const { canceled, filePaths } = await dialog.showOpenDialog()
+  const { canceled, filePaths } = await dialog.showOpenDialog();
+
   if (canceled) {
     console.log("No file selected");
 
@@ -16,10 +17,8 @@ async function handleFileOpen() {
   }
 }
 
-function ReadFile(filePath) {
-  console.log('path to file to read: ', filePath);
-
-  const readData = fs.readFileSync(filePath, 'utf-8', (err, data) => {
+function ReadFile(filePath: string): Buffer {
+  const readData = fs.readFileSync(filePath, (err: any, data: Buffer) => {
     if(err){
         alert("An error ocurred reading the file :" + err.message);
         return;
@@ -41,7 +40,7 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('../index.html')
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
