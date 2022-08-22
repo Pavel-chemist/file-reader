@@ -62,21 +62,10 @@ function hexStringToBytes(input: string): string {
 
 function hexStringToAdvanced(input: string): string {
   let result: string = '';
+  let substringIndex: string;
   let substringHex: string;
   let substringAscii: string;
   let charCode: number;
-  let hexNum: string;
-
-  /* input = '';
-  for (let i = 0; i < (256 * 16); i++) {
-    hexNum = (Math.floor(i/16)).toString(16);
-
-    if (hexNum.length > 1) {
-      input += hexNum;
-    } else {
-      input += '0' + hexNum;
-    }
-  } */
 
   if (input.length % 32) {
     const padding: number = input.length % 32;
@@ -86,6 +75,7 @@ function hexStringToAdvanced(input: string): string {
   }
 
   for (let i = 0; i < input.length; i+=32 ) {
+    substringIndex = formIndexSubstr(i);
     substringHex = '';
     substringAscii = '';
 
@@ -97,11 +87,29 @@ function hexStringToAdvanced(input: string): string {
 
       charCode = Number('0x' + input[i + j] + input[i +j + 1]);
       
-      charCode > 31 ? substringAscii += String.fromCharCode(charCode) : substringAscii += String.fromCharCode(0);
+      charCode > 31 && charCode < 127 || charCode > 160 ? substringAscii += String.fromCharCode(charCode) : substringAscii += String.fromCharCode(0);
     }
 
-    result += substringHex + ' | ' + substringAscii + '\n';
+    result += substringIndex + substringHex + ' | ' + substringAscii + '\n';
   }
 
   return result;
+}
+
+function formIndexSubstr(i: number): string {
+  let lineNumber: number = (i/32);
+
+  if (lineNumber < 10) {
+    return `     ${lineNumber} | `;
+  } else if (lineNumber < 100) {
+    return `    ${lineNumber} | `;
+  } else if (lineNumber < 1000) {
+    return `   ${lineNumber} | `;
+  } else if (lineNumber < 10000) {
+    return `  ${lineNumber} | `;
+  } else if (lineNumber < 100000) {
+    return ` ${lineNumber} | `;
+  } else {
+    return `${lineNumber} | `;
+  }
 }

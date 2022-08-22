@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
-const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+const fs = require('fs'); // Load the File System
 
 async function handleFileOpen() {
   const { canceled, filePaths } = await dialog.showOpenDialog();
@@ -52,7 +52,6 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   ipcMain.handle('dialog:openFile', handleFileOpen);
-  // ipcMain.handle('fs:readFile', handleReadFile);
 
   createWindow();
 })
