@@ -17,12 +17,13 @@ async function handleFileOpen() {
   }
 }
 
-function ReadFile(filePath: string): Buffer {
-  const readData = fs.readFileSync(filePath, (err: any, data: Buffer) => {
+function ReadFile(filePath: string): string {
+  const readData = fs.readFileSync(filePath, 'hex', (err: any, data: Buffer) => {
     if(err){
         alert("An error ocurred reading the file :" + err.message);
         return;
     }
+
     return data;
   });
 
@@ -43,7 +44,7 @@ function createWindow () {
   mainWindow.loadFile('../index.html')
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
